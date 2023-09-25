@@ -1,0 +1,45 @@
+.login{
+    flex: 1;
+    background-color:#12002b;
+    display: flex;
+    align-items: center;
+}
+
+.loginForm{
+    padding: 2rem;
+    background-color:white;
+    margin-left:auto;
+    margin-right:auto;
+    min-width: 300px;
+    width: fit-content;
+    height: fit-content;
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.loginFormTitle{
+    margin:0;
+}
+
+.loginLabelInput{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+.loginLabelInput> label{
+    font-weight: bold;
+}
+.loginLabelInput > input{
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 1rem;
+}
+
+.inputRememberMe{
+    width: 100%;
+}

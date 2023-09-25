@@ -1,0 +1,13 @@
+.navItem{
+    display: flex;
+    flex-direction: row;
+    gap:5px;
+}
+.navItem > a{
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+}
+.navItem > a:hover{
+    text-decoration: underline;
+}
