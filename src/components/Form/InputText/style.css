@@ -1,0 +1,16 @@
+.InputTextWithLabel{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+.InputTextWithLabel> label{
+    font-weight: bold;
+}
+.InputTextWithLabel > input{
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 1.2rem;
+}

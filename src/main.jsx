@@ -6,9 +6,10 @@ import {
 } from "react-router-dom";
 import './global.css'
 
-import Layout from "./Layout/index.jsx";
-import Home from "./Pages/Home/index.jsx";
-import Login from "./Pages/Login/index.jsx";
+import Layout from "./Layout";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import {Dashboard} from "./Pages/Dashboard/index.jsx";
 
 const router = createBrowserRouter([
     {
@@ -25,10 +26,15 @@ const router = createBrowserRouter([
                 <Login />
             </Layout>,
     },
+    {
+        path: "/dashboard",
+        element:
+            <Layout>
+                <Dashboard />
+            </Layout>,
+    },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
       <RouterProvider router={router} />
-  </React.StrictMode>,
 )

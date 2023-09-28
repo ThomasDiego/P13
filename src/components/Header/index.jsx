@@ -1,6 +1,6 @@
 import "./style.css"
 import Logo from "../../assets/logo.png"
-import NavItem from "./NavItem/index.jsx";
+import NavItem from "./NavItem";
 import { Link } from "react-router-dom";
 const Header = () => {
     return (

@@ -1,5 +1,5 @@
 import Hero from '../../components/Hero'
-import SingleFeature from "../../components/SingleFeature/index.jsx";
+import SingleFeature from "../../components/SingleFeature";
 import './style.css'
 const Home = () => {
     return (
