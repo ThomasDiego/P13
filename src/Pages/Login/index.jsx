@@ -8,6 +8,7 @@ import { LoginApi, getUserDatas} from "../../api"
 //adding Redux
 import { useSelector, useDispatch} from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {LoadingSpinner} from "../../components/LoadingSpinner/index.jsx";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -19,9 +20,11 @@ const Login = () => {
     const [password, setPassword] = useState("")
     const [rememberMe, setRememberMe] = useState(false)
     const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const handleButtonCallback = async () => {
         try{
+            setLoading(true)
             const response = await LoginApi({email, password, rememberMe})
             if(response.status === 200) {
                 const userDatas = await getUserDatas(response.body.token)
@@ -36,6 +39,7 @@ const Login = () => {
                 throw new Error(response.message);
             }
         }catch (e) {
+            setLoading(false)
             setError(e.message)
             console.log(e.message)
         }
@@ -49,7 +53,7 @@ const Login = () => {
                 <InputText type={"password"} label={"Password"} name={"password"} handleCallback={(dataCallback) => {setPassword(dataCallback.value); setError("")}} />
                 <CheckboxInput label={"Remember me"} name={"rememberMe"} handleCheckboxCallback={(dataCallback) => {setRememberMe(dataCallback.value); setError("")}}/>
                 {error && <div className="errorLogin">{error}</div>}
-                <Button width={"100%"} content={"Sign In"} handleButtonCallback={handleButtonCallback}/>
+                {loading ? <LoadingSpinner/> : <Button width={"100%"} content={"Sign In"} handleButtonCallback={handleButtonCallback}/>}
             </div>
         </div>
     );
