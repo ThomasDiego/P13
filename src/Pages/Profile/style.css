@@ -34,7 +34,8 @@
 }
 
 .inlineButton{
-        display: flex;
+        grid-template-columns: 1fr 1fr;
+        display: grid;
         gap: 10px;
 }
 .inlineInput{
@@ -47,4 +48,10 @@
         border: 1px solid #ccc;
         outline: none;
         font-size: 1.2rem;
+}
+
+@media (max-width: 920px){
+        .inlineInput{
+                flex-direction: column;
+        }
 }

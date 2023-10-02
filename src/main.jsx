@@ -9,7 +9,13 @@ import './global.css'
 import Layout from "./Layout";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
-import {Dashboard} from "./Pages/Dashboard/index.jsx";
+import {Profile} from "./Pages/Profile";
+
+//adding Redux
+import { store } from './store'
+import { Provider } from 'react-redux'
+import {ProtectedRoute} from "./features/ProtectedRoute";
+import {UnprotectedRoute} from "./features/UnprotectedRoute";
 
 const router = createBrowserRouter([
     {
@@ -20,21 +26,28 @@ const router = createBrowserRouter([
             </Layout>,
     },
     {
-        path: "/sign-in",
+        path: "/login",
         element:
+        <UnprotectedRoute>
             <Layout>
                 <Login />
-            </Layout>,
+            </Layout>
+        </UnprotectedRoute>,
     },
     {
-        path: "/dashboard",
+        path: "/profile",
         element:
+        <ProtectedRoute>
             <Layout>
-                <Dashboard />
-            </Layout>,
+                <Profile />
+            </Layout>
+        </ProtectedRoute>
+        ,
     },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+    <Provider store={store}>
       <RouterProvider router={router} />
+    </Provider>
 )

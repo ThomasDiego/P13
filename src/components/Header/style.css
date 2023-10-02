@@ -16,3 +16,11 @@ nav{
     flex-direction: row;
     gap: 20px;
 }
+
+@media (max-width: 920px){
+    .logo {
+        width: 130px;
+        display: flex;
+        align-items: center;
+    }
+}

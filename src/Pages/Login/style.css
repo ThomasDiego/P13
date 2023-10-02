@@ -43,3 +43,7 @@
 .inputRememberMe{
     width: 100%;
 }
+
+.errorLogin{
+    color:red;
+}
