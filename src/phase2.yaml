@@ -1,0 +1,174 @@
+swagger: "2.0"
+info:
+  title: "Bank Argent API documentation"
+  description: "Contains all available API endpoints in this codebase"
+  version: '1.0.0'
+host: localhost:3001
+basePath: "/api/v1"
+schemes:
+  - "http"
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+paths:
+  /users/{user_id}/accounts:
+    get:
+      summary: "View all user accounts"
+      description: "Retrieves the list of all accounts for a user."
+      parameters:
+        - name: "user_id"
+          in: "path"
+          required: true
+          type: "integer"
+          format: "int64"
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: "Success - List of user accounts"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Account"
+  /accounts/{account_id}/transactions:
+    get:
+      summary: "View all transactions for the current month"
+      description: "Retrieves the list of all transactions for a specific account and the current month."
+      parameters:
+        - name: "account_id"
+          in: "path"
+          required: true
+          type: "integer"
+          format: "int64"
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: "Success - List of account transactions for the current month"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Transaction"
+    post:
+      summary: "Add a new transaction to an account"
+      description: "Adds a new transaction to a specific account."
+      parameters:
+        - name: "account_id"
+          in: "path"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "transaction"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/NewTransaction"
+      security:
+        - Bearer: []
+      responses:
+        201:
+          description: "Successfully created - ID of the new transaction"
+        400:
+          description: "Bad request - Incorrect transaction data"
+  /transactions/{transaction_id}:
+    get:
+      summary: "View transaction details"
+      description: "Retrieves details of a specific transaction."
+      parameters:
+        - name: "transaction_id"
+          in: "path"
+          required: true
+          type: "integer"
+          format: "int64"
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: "Success - Transaction details"
+          schema:
+            $ref: "#/definitions/Transaction"
+        404:
+          description: "Not found - Transaction not found"
+    put:
+      summary: "Modify transaction information"
+      description: "Modifies information of a specific transaction."
+      parameters:
+        - name: "transaction_id"
+          in: "path"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "transaction"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Transaction"
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: "Success - Transaction modified successfully"
+        404:
+          description: "Not found - Transaction not found"
+    delete:
+      summary: "Delete a transaction"
+      description: "Deletes a specific transaction."
+      parameters:
+        - name: "transaction_id"
+          in: "path"
+          required: true
+          type: "integer"
+          format: "int64"
+      security:
+        - Bearer: []
+      responses:
+        204:
+          description: "No content - Transaction deleted successfully"
+        404:
+          description: "Not found - Transaction not found"
+definitions:
+  Account:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      type:
+        type: "string"
+      balance:
+        type: "number"
+        format: "float"
+  NewTransaction:
+    type: "object"
+    properties:
+      date:
+        type: "string"
+        format: "date"
+      description:
+        type: "string"
+      amount:
+        type: "number"
+        format: "float"
+      balance:
+        type: "number"
+        format: "float"
+      type:
+        type: "integer"
+        format: "int64"
+      category:
+        type: "integer"
+        format: "int64"
+      notes:
+        type: "string"
+  Transaction:
+    allOf:
+      - $ref: "#/definitions/NewTransaction"
+      - type: "object"
+        properties:
+          id:
+            type: "integer"
+            format: "int64"
